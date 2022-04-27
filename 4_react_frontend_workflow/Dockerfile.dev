@@ -1,13 +1,17 @@
 # Specifiy base image
 FROM node:16-alpine
 
+# Set user
+USER node
+
 # Set working directory
-WORKDIR "/app"
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
 
 # Commands to run
-COPY package.json .
+COPY --chown=node:node package.json .
 RUN npm install
-COPY . .
+COPY --chown=node:node . .
 
 # Commands to execute upon boot
 CMD ["npm", "run", "start"]
