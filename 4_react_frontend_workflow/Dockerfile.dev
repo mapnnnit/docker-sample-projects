@@ -1,0 +1,13 @@
+# Specifiy base image
+FROM node:16-alpine
+
+# Set working directory
+WORKDIR "/app"
+
+# Commands to run
+COPY package.json .
+RUN npm install
+COPY . .
+
+# Commands to execute upon boot
+CMD ["npm", "run", "start"]
